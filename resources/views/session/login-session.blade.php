@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <main class="main-content  mt-0">
+  <main class="main-content mt-0">
     <section>
       <div class="page-header min-vh-75">
         <div class="container">
@@ -10,11 +10,16 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang</h3>
-                  <p class="mb-0">Buat akun baru<br></p>
-                  <p class="mb-0">Atau:</p>
-                  <p class="mb-0">Email <b>admin@softui.com</b></p>
-                  <p class="mb-0">Password <b>secret</b></p>
+                  <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang di UKM Computer Science Binus</h3>
+                  <p class="mb-0">Kami adalah komunitas mahasiswa di bidang teknologi dan ilmu komputer di Universitas Bina Nusantara.</p>
+                  <p class="mb-0">Temui pengurus kami:</p>
+                  <ul>
+                    <li><b>Ketua:</b> [Nama Ketua]</li>
+                    <li><b>Wakil Ketua:</b> [Nama Wakil Ketua]</li>
+                    <li><b>Divisi Teknologi:</b> [Nama Divisi Teknologi]</li>
+                    <li><b>Divisi Pengembangan Karir:</b> [Nama Divisi Pengembangan Karir]</li>
+                  </ul>
+                  <p class="mb-0">Untuk bergabung dan menjadi bagian dari kami, silakan login atau buat akun baru.</p>
                 </div>
                 <div class="card-body">
                   <form role="form" method="POST" action="/session">
@@ -35,20 +40,20 @@
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                      <label class="form-check-label" for="rememberMe">Ingat saya</label>
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Masuk</button>
                     </div>
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <small class="text-muted">Lupa password? Reset password 
-                  <a href="/login/forgot-password" class="text-info text-gradient font-weight-bold">here</a>
-                </small>
+                  <small class="text-muted">Lupa password? Reset password 
+                    <a href="/login/forgot-password" class="text-info text-gradient font-weight-bold">di sini</a>
+                  </small>
                   <p class="mb-4 text-sm mx-auto">
-                    Tidak memiliki akun?
-                    <a href="register" class="text-info text-gradient font-weight-bold">Regis</a>
+                    Belum punya akun? 
+                    <a href="register" class="text-info text-gradient font-weight-bold">Daftar</a>
                   </p>
                 </div>
               </div>
