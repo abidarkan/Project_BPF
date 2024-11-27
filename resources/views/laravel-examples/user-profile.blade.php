@@ -20,7 +20,7 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ __('Abid Asyam Arkan') }} 
+                            {{ Auth::user()->name }} 
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
                             {{ __('Mahasiswa') }}

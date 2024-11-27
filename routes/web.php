@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('static-sign-up');
 	})->name('sign-up');
 
+	
+
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
@@ -80,7 +82,8 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-	
+	//Route::post('/user-profile', [UserController::class, 'updateProfile'])->name('user.profile.update');
+
 
 
 });
