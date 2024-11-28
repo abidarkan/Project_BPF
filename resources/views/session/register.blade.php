@@ -92,7 +92,7 @@
                     I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
                   </label>
                   @error('agreement')
-                    <p class="text-danger text-xs mt-2">First, agree to the Terms and Conditions, then try register again.</p>
+                    <p class="text-danger textp-xs mt-2">First, agree to the Terms and Conditions, then try register again.</p>
                   @enderror
                 </div>
                 <div class="text-center">

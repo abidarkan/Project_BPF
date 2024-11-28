@@ -159,14 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user.location" class="form-control-label">{{ __('Location') }}</label>
-                                <div class="@error('user.location') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Location" id="name" name="location" value="{{ auth()->user()->location }}">
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="form-group">
                         <label for="about">{{ 'About Me' }}</label>
