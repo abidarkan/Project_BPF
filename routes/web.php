@@ -9,23 +9,21 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
-use App\Models\Article;
-
 /*
-|----------------------------------------------------------------------
+|-------------------------------------------------------------------------- 
 | Web Routes
-|----------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+|-------------------------------------------------------------------------- 
+| 
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider within a group 
+| which contains the "web" middleware group. Now create something great!
 |
 */
 
 // Authenticated Routes
 Route::group(['middleware' => 'auth'], function () {
     // Dashboard Home
-    Route::get('/', [HomeController::class, 'home']);
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
     // Example Views
     Route::get('dashboard', fn() => view('dashboard'))->name('dashboard');
@@ -38,14 +36,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('static-sign-up', fn() => view('static-sign-up'))->name('sign-up');
 
     // User Profile Routes
-    Route::get('/user-profile', [InfoUserController::class, 'create']);
+    Route::get('/user-profile', [InfoUserController::class, 'create'])->name('user-profile');
     Route::post('/user-profile', [InfoUserController::class, 'store']);
 
     // Article Routes
-    Route::get('articles/create', [ArtikelController::class, 'create'])->name('articles.create');
-    Route::post('articles/store', [ArtikelController::class, 'store'])->name('articles.store');
-    Route::get('/articles/{id}', [ArtikelController::class, 'show'])->name('articles.show'); // Ensure this is the only route handling /articles/{id}
-
+    Route::get('artikel/create', [ArtikelController::class, 'create'])->name('artikel.create'); // Show create article form
+    Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store'); // Store new article
+    Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show'); // Show article by ID
+    
     // User Management Routes
     Route::get('user-management', fn() => view('laravel-examples/user-management'))->name('user-management');
 
@@ -56,16 +54,16 @@ Route::group(['middleware' => 'auth'], function () {
 // Guest Routes
 Route::group(['middleware' => 'guest'], function () {
     // Registration
-    Route::get('/register', [RegisterController::class, 'create']);
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 
     // Login
-    Route::get('/login', [SessionsController::class, 'create']);
+    Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/session', [SessionsController::class, 'store']);
 
     // Password Reset
-    Route::get('/login/forgot-password', [ResetController::class, 'create']);
-    Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+    Route::get('/login/forgot-password', [ResetController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });

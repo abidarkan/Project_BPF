@@ -2,41 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\Artikel; // Use the correct model
+use App\Models\Article; // Ensure this model exists
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
-    // Show the create article form
+    /**
+     * Display a specific article.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
-        $artikel = Article::findOrFail($id); // Fetch the artikel or fail
-        return view('artikel.show', compact('artikel')); // Return view with artikel
+        $article = Article::findOrFail($id);  // Find article or return 404
+        return view('artikel', compact('article'));
     }
 
+    /**
+     * Show the form for creating a new article.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
-        return view('artikel.create'); // Create form view
+        return view('artikel_create'); // Load the creation form
     }
 
-    // Store the article in the database
+    /**
+     * Store a new article in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
-        // Validate the request
+        // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
-        // Create the artikel
-        $artikel = Article::create([
-            'author_id' => auth(), // Store authenticated user ID
+        // Create the article
+        Article::create([
+            'author_id' => auth(), // Store the ID of the authenticated user
             'title' => $validatedData['title'],
             'content' => $validatedData['content'],
         ]);
 
-        // Redirect to the relevant page
-        return redirect()->route('artikel.index')->with('success', 'Artikel created successfully!');
+        // Redirect to a success page (adjust as needed)
+        return redirect()->route('artikel.create')->with('success', 'Artikel created successfully!');
     }
 }

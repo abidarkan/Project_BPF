@@ -10,8 +10,11 @@
                     <h4 class="mb-0">{{ $article->title }}</h4>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted">Published on: <span class="text-dark">{{ $article->created_at->format('F d, Y') }}</span></p>
-                    <p>{{ $article->content }}</p>
+                    <p><strong>Published on:</strong> {{ $article->created_at->format('d M, Y') }}</p>
+                    <hr>
+                    <div class="content">
+                        {!! nl2br(e($article->content)) !!}
+                    </div>
                 </div>
             </div>
 
@@ -81,7 +84,7 @@
                     <h5 class="mb-0">Admin Actions</h5>
                 </div>
                 <div class="card-body d-flex align-items-center justify-content-center">
-                    <a href="{{ route('articles.create') }}" class="btn bg-gradient-primary">Create New Article</a>
+                    <a href="{{ route('artikel.create') }}" class="btn bg-gradient-primary">Create New Artikel</a>
                 </div>
             </div>
         </div>
