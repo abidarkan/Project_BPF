@@ -7,9 +7,12 @@
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-header bg-gradient-primary text-white">
-                        <h4 class="mb-0">ass shit</h4>
+                        <h4 class="mb-0">{{ $article->title }}</h4>
                     </div>
-                    <div class="container"> <h1 class="mt-5">{{ $article->title }}</h1> <p>{{ $article->content }}</p>
+                    <div class="container">
+                        <h1 class="mt-5">{{ $article->title }}</h1>
+                        <p>{!! nl2br(e($article->content)) !!}</p>
+                    </div>
 
                     <!-- Comments Section -->
                     <div class="card">
@@ -19,7 +22,7 @@
                         <div class="card-body">
                             <ul class="list-group">
                                 <!-- Example Comments -->
-                                <li class="list-group-item d-flex align-items-center">  
+                                <li class="list-group-item d-flex align-items-center">
                                     <div>
                                         <h6 class="text-dark mb-1">John Doe</h6>
                                         <p class="mb-0 text-sm">This is a great article! Really enjoyed the insights.</p>
@@ -29,8 +32,7 @@
                                 <li class="list-group-item d-flex align-items-center">
                                     <div>
                                         <h6 class="text-dark mb-1">Jane Smith</h6>
-                                        <p class="mb-0 text-sm">I found the details about the topic very helpful. Thank you!
-                                        </p>
+                                        <p class="mb-0 text-sm">I found the details about the topic very helpful. Thank you!</p>
                                         <span class="text-xs text-muted">Posted on: March 03, 2023</span>
                                     </div>
                                 </li>
@@ -48,11 +50,10 @@
                 </div>
 
                 <!-- Sidebar -->
-                
 
-                    <!-- Create Article Button -->
-                    
-                </div>
+                <!-- Create Article Button -->
+
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
