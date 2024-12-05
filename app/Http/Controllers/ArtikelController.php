@@ -3,25 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('user')->get();
+        $articles = Article::with(['user', 'tags'])->get();
         return view('artikel', compact('articles'));
     }
 
     public function show($id)
     {
-        $article = Article::with('user')->findOrFail($id);
+        $article = Article::with(['user', 'tags'])->findOrFail($id);
         return view('artikel_show', compact('article'));
     }
 
     public function create()
     {
-        return view('artikel_create');
+        $tags = Tag::all();
+        return view('artikel_create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -29,14 +31,18 @@ class ArtikelController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
-        Article::create([
-            'author_id' => auth()->id(), // Store the ID of the authenticated user
+        $article = Article::create([
+            'author_id' => auth()->id(),
             'title' => $validatedData['title'],
             'content' => $validatedData['content'],
         ]);
 
-        return redirect()->route('artikel.create')->with('success', 'Artikel created successfully!');
+        $article->tags()->attach($validatedData['tags']);
+
+        return redirect()->route('artikel.index')->with('success', 'Artikel created successfully!');
     }
 }

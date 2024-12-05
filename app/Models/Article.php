@@ -9,15 +9,17 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $table = 'articles';
+    protected $table = 'articles'; 
 
     protected $fillable = ['title', 'content', 'author_id'];
 
-    /**
-     * Get the user that created the article.
-     */
     public function user()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag');
     }
 }

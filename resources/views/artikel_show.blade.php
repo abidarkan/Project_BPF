@@ -13,6 +13,9 @@
                         <h1 class="mt-5">{{ $article->title }}</h1>
                         <p>{!! nl2br(e($article->content)) !!}</p>
                     </div>
+                    <div>
+                        
+                    </div>
 
                     <!-- Comments Section -->
                     <div class="card">
