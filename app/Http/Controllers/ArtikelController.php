@@ -8,15 +8,19 @@ use Illuminate\Http\Request;
 class ArtikelController extends Controller
 {
     /**
-     * Display a specific article.
+     * Display a listing of all articles.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
+    public function index()
+    {
+        $articles = Article::all();
+        return view('artikel', compact('articles'));
+    }
     public function show($id)
     {
-        $article = Article::findOrFail($id);  // Find article or return 404
-        return view('artikel', compact('article'));
+        $article = Article::findOrFail($id); // Find article or return 404 
+        return view('artikel_show', compact('article'));
     }
 
     /**
@@ -32,7 +36,7 @@ class ArtikelController extends Controller
     /**
      * Store a new article in the database.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)

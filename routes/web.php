@@ -7,6 +7,7 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Example Views
     Route::get('dashboard', fn() => view('dashboard'))->name('dashboard');
-    Route::get('artikel', fn() => view('artikel'))->name('artikel');
+
+    Route::get('artikel', function () {
+        $articles = Article::all();
+        return view('artikel', compact('articles'));
+    })->name('artikel.index');
+    
     Route::get('profile', fn() => view('profile'))->name('profile');
     Route::get('rtl', fn() => view('rtl'))->name('rtl');
     Route::get('tables', fn() => view('tables'))->name('tables');
@@ -43,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('artikel/create', [ArtikelController::class, 'create'])->name('artikel.create'); // Show create article form
     Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store'); // Store new article
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show'); // Show article by ID
-    
+
     // User Management Routes
     Route::get('user-management', fn() => view('laravel-examples/user-management'))->name('user-management');
 

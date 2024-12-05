@@ -9,19 +9,7 @@
                     <div class="card-header bg-gradient-primary text-white">
                         <h4 class="mb-0">ass shit</h4>
                     </div>
-                    <div class="container">
-                        <h1 class="mt-5">All Articles</h1>
-                        @if ($articles->count() > 0)
-                            @foreach ($articles as $article)
-                                <div class="mb-4">
-                                    <h4 class="mb-0">{{ $article->title }}</h4>
-                                    <p>{{ $article->content }}</p>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No articles found.</p>
-                        @endif
-                    </div>
+                    <div class="container"> <h1 class="mt-5">{{ $article->title }}</h1> <p>{{ $article->content }}</p>
 
                     <!-- Comments Section -->
                     <div class="card">
@@ -31,7 +19,7 @@
                         <div class="card-body">
                             <ul class="list-group">
                                 <!-- Example Comments -->
-                                <li class="list-group-item d-flex align-items-center">
+                                <li class="list-group-item d-flex align-items-center">  
                                     <div>
                                         <h6 class="text-dark mb-1">John Doe</h6>
                                         <p class="mb-0 text-sm">This is a great article! Really enjoyed the insights.</p>
@@ -63,14 +51,7 @@
                 
 
                     <!-- Create Article Button -->
-                    <div class="card h-100">
-                        <div class="card-header bg-gradient-secondary text-white">
-                            <h5 class="mb-0">Admin Actions</h5>
-                        </div>
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <a href="{{ route('artikel.create') }}" class="btn bg-gradient-primary">Create New Artikel</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
