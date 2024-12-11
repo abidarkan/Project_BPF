@@ -18,8 +18,7 @@
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Judul</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tag</th>
                                             <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Penulis</th>
-                                            {{-- <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Balasan</th>
-                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aktivitas Terakhir</th> --}}
+                                            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aktivitas Terakhir</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,17 +49,12 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>
-                                                        <span class="text-xs">15</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-xs">2 jam yang lalu</span>
-                                                    </td> --}}
+                                                    <td class="text-xs">{{ $article->updated_at->diffForHumans() }}</td>
                                                 </tr>
                                             @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="5">No articles found.</td>
+                                                <td colspan="4">No articles found.</td>
                                             </tr>
                                         @endif
                                     </tbody>

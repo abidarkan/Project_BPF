@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Article;
+use App\Http\Controllers\DiscussionController;
+use App\Http\Controllers\DiscussionCommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,10 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
         $articles = Article::all();
         return view('artikel', compact('articles'));
     })->name('artikel.index');
-    
+
     Route::get('profile', fn() => view('profile'))->name('profile');
     Route::get('rtl', fn() => view('rtl'))->name('rtl');
-    Route::get('tables', fn() => view('tables'))->name('tables');
+    Route::get('diskusi', fn() => view('diskusi'))->name('diskusi');
     Route::get('virtual-reality', fn() => view('virtual-reality'))->name('virtual-reality');
     Route::get('static-sign-in', fn() => view('static-sign-in'))->name('sign-in');
     Route::get('static-sign-up', fn() => view('static-sign-up'))->name('sign-up');
@@ -55,6 +57,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Logout
     Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
+
+    // Route Diskusi
+    Route::resource('discussions', DiscussionController::class);
+    Route::post('discussion-comments', [DiscussionCommentController::class, 'store'])->name('discussion-comments.store');
+    Route::get('diskusi', [DiscussionController::class, 'index'])->name('diskusi.index');
+    Route::get('showDiskusi/{id}', [DiscussionController::class, 'show'])->name('discussions.show');
+    Route::get('createDiskusi', [DiscussionController::class, 'create'])->name('discussions.create');
 });
 
 // Guest Routes

@@ -46,7 +46,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">DISKUSI</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('tables') ? 'active' : '' }}" href="{{ url('tables') }}">
+                <a class="nav-link {{ Request::is('diskusi') ? 'active' : '' }}" href="{{ url('diskusi') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -68,7 +68,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Aku ingin bertanya</span>
+                    <span class="nav-link-text ms-1">Diskusi</span>
                 </a>
             </li>
 
