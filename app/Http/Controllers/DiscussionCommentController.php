@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-
 use App\Models\DiscussionComment;
 use Illuminate\Http\Request;
 
@@ -13,15 +11,15 @@ class DiscussionCommentController extends Controller
     {
         $validatedData = $request->validate([
             'discussion_id' => 'required|exists:discussions,id',
-            'content' => 'required|string|max:1000',
+            'comment' => 'required|string|max:1000',
         ]);
 
         DiscussionComment::create([
             'discussion_id' => $validatedData['discussion_id'],
             'created_by' => auth()->id(),
-            'content' => $validatedData['content'],
+            'comment' => $validatedData['comment'],
         ]);
 
-        return back()->with('success', 'Comment posted successfully!');
+        return back()->with('success', 'Balasan posted successfully!');
     }
 }

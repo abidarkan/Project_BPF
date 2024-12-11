@@ -1,49 +1,65 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-<div class="container-fluid py-4">
+<div class="container-fluid py-4" style="font-family: 'Arial', sans-serif; color: #333;">
+
+    <!-- Discussion Card Section -->
     <div class="row">
         <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-header bg-gradient-primary text-white">
-                    <h4 class="mb-0">{{ $discussion->title }}</h4>
+            <div class="card mb-4 shadow-sm" style="border: 1px solid #333; border-radius: 8px;">
+
+                <!-- Discussion Title Section -->
+                <div class="card-header text-white text-center" 
+                     style="background-color: #333; border-radius: 8px 8px 0 0; font-size: 24px; font-weight: bold;">
+                    {{ $discussion->title }}
                 </div>
-                <div class="container">
-                    <h1 class="mt-5">{{ $discussion->title }}</h1>
-                    <p>{!! nl2br(e($discussion->content)) !!}</p>
+                
+                <!-- Discussion Content Section -->
+                <div class="container p-4" style="background-color: #f8f8f8; border-radius: 0 0 8px 8px;">
+                    <h2 class="mt-2 text-dark">{{ $discussion->title }}</h2>
+                    <p class="text-dark text-sm">{!! nl2br(e($discussion->content)) !!}</p>
                 </div>
 
                 <!-- Comments Section -->
-                <div class="card">
-                    <div class="card-header bg-gradient-secondary text-white">
+                <div class="card mt-4 shadow-sm" style="border: 1px solid #555; border-radius: 8px;">
+                    <div class="card-header text-white text-center" style="background-color: #555;">
                         <h5 class="mb-0">Comments</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-white">
                         <ul class="list-group">
-                            @foreach ($discussion->comments as $comment)
-                                <li class="list-group-item d-flex align-items-center">
+                            @forelse ($discussion->comments as $comment)
+                                <li class="list-group-item d-flex align-items-center border-light" style="border-radius: 5px; border: 1px solid #ddd;">
                                     <div>
                                         <h6 class="text-dark mb-1">{{ $comment->user->name }}</h6>
-                                        <p class="mb-0 text-sm">{{ $comment->content }}</p>
+                                        <p class="mb-0 text-sm text-muted">{{ $comment->comment }}</p>
                                         <span class="text-xs text-muted">Posted on: {{ $comment->created_at->format('M d, Y') }}</span>
                                     </div>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li class="list-group-item text-muted text-sm text-center">No comments yet. Be the first to comment!</li>
+                            @endforelse
                         </ul>
 
-                        <!-- Add Comment -->
+                        <!-- Comment Submission Form -->
                         <form action="{{ route('discussion-comments.store') }}" method="POST" class="mt-3">
                             @csrf
                             <input type="hidden" name="discussion_id" value="{{ $discussion->id }}">
                             <div class="form-group">
-                                <textarea class="form-control" rows="3" name="content" placeholder="Write a comment..." required></textarea>
+                                <textarea 
+                                    class="form-control border-dark rounded-3" 
+                                    rows="3" 
+                                    name="comment" 
+                                    placeholder="Write your response here..." 
+                                    required
+                                ></textarea>
                             </div>
-                            <button type="submit" class="btn bg-gradient-primary mt-2">Post Comment</button>
+                            <button type="submit" class="btn btn-dark text-white mt-2 rounded-3">Post Comment</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 @endsection

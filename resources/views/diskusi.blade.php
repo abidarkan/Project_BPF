@@ -3,57 +3,77 @@
 @section('content')
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
     <div class="container-fluid py-4">
+        
+        <!-- Header Section with "Mulai Diskusi" -->
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <h6 class="text-dark font-weight-bold">Diskusi</h6>
+                <a class="btn btn-dark text-white btn-sm" href="{{ route('discussions.create') }}">Mulai Diskusi</a>
+            </div>
+        </div>
+
+        <!-- Discussion Table Card Section -->
         <div class="row">
             <div class="col-12">
-                <div class="card h-100">
-                    <div class="card-header pb-0 p-3">
-                        <h6 class="mb-0">Diskusi</h6>
-                        <a class="btn btn-primary btn-sm ms-auto" href="{{ route('discussions.create') }}">Mulai Diskusi</a>
-                    </div>
+                <div class="card shadow-sm border-0">
                     <div class="card-body p-3">
                         <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
+                            <table class="table align-items-center mb-0 table-striped">
+                                <thead class="text-uppercase text-secondary text-xs font-weight-bolder" style="background-color: #f2f2f2;">
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Judul</th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tag</th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Penulis</th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Balasan</th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aktivitas Terakhir</th>
+                                        <th>Judul</th>
+                                        <th>Tag</th>
+                                        <th>Penulis</th>
+                                        <th>Balasan</th>
+                                        <th>Aktivitas Terakhir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($discussions->count() > 0)
                                         @foreach ($discussions as $discussion)
                                             <tr>
+                                                <!-- Title -->
                                                 <td>
-                                                    <a href="{{ route('discussions.show', $discussion->id) }}" class="text-sm font-weight-bold text-dark">
+                                                    <a href="{{ route('discussions.show', $discussion->id) }}"
+                                                        class="text-dark text-sm font-weight-bold">
                                                         {{ $discussion->title }}
                                                     </a>
                                                 </td>
+                                                
+                                                <!-- Tags Section -->
                                                 <td>
                                                     @foreach($discussion->tags as $tag)
-                                                        <span class="badge bg-primary text-white">{{ $tag->name }}</span>
+                                                        <span class="badge bg-secondary text-white">{{ $tag->name }}</span>
                                                     @endforeach
                                                 </td>
+                                                
+                                                <!-- Author Info -->
                                                 <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="d-flex align-items-start flex-column justify-content-center">
-                                                            @if($discussion->user)
-                                                                <h6 class="mb-0 text-sm">{{ $discussion->user->name }}</h6>
-                                                            @else
-                                                                <h6 class="mb-0 text-sm">Unknown Author</h6>
-                                                            @endif
+                                                    @if($discussion->user)
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="text-sm text-muted">{{ $discussion->user->name }}</span>
                                                         </div>
-                                                    </div>
+                                                    @else
+                                                        <span class="text-sm text-muted">Unknown Author</span>
+                                                    @endif
                                                 </td>
-                                                <td class="text-xs">{{ $discussion->comments->count() }}</td>
-                                                <td class="text-xs">{{ $discussion->updated_at->diffForHumans() }}</td>
+                                                
+                                                <!-- Comments Count -->
+                                                <td class="text-center text-sm">
+                                                    {{ $discussion->comments->count() }}
+                                                </td>
+                                                
+                                                <!-- Last Activity -->
+                                                <td class="text-muted text-sm">
+                                                    {{ $discussion->updated_at->diffForHumans() }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="5">No discussions found.</td>
+                                            <td colspan="5" class="text-muted text-center py-3">
+                                                Belum ada diskusi. Mulai dengan membuat yang baru!
+                                            </td>
                                         </tr>
                                     @endif
                                 </tbody>
@@ -63,6 +83,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </main>
 @endsection

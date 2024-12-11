@@ -13,10 +13,10 @@ use App\Http\Controllers\DiscussionCommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|-------------------------------------------------------------------------- 
+|--------------------------------------------------------------------------
 | Web Routes
-|-------------------------------------------------------------------------- 
-| 
+|--------------------------------------------------------------------------
+|
 | Here is where you can register web routes for your application.
 | These routes are loaded by the RouteServiceProvider within a group 
 | which contains the "web" middleware group. Now create something great!
@@ -24,12 +24,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Authenticated Routes
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware('auth')->group(function () {
     // Dashboard Home
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     // Example Views
-    Route::get('dashboard', fn() => view('dashboard'))->name('dashboard');
+    Route::get('/dashboard', function () {
+        $articles = Article::all();
+        return view('dashboard', compact('articles'));
+    })->name('dashboard');
 
     Route::get('artikel', function () {
         $articles = Article::all();
@@ -67,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Guest Routes
-Route::group(['middleware' => 'guest'], function () {
+Route::middleware('guest')->group(function () {
     // Registration
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
@@ -84,4 +87,4 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 // Fallback Login View for Guests
-Route::get('/login', fn() => view('session/login-session'))->name('login');
+Route::get('/login-fallback', fn() => view('session/login-session'))->name('login-fallback');
