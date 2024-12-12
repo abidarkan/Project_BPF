@@ -10,6 +10,8 @@ use App\Http\Controllers\SessionsController;
 use App\Models\Article;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DiscussionCommentController;
+use App\Http\Controllers\EventController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +57,15 @@ Route::middleware('auth')->group(function () {
     Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store'); // Store new article
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show'); // Show article by ID
 
+    // Events Routes
+    Route::get('/event', [EventController::class, 'index'])->name('events.index');
+    Route::get('/event/create', [EventController::class, 'create'])->name('event_create');
+    Route::put('/event/{event}', [EventController::class, 'update'])->name('event_update');
+    Route::post('/event', [EventController::class, 'store'])->name('event_store');
+    Route::post('/event/{event}', [EventController::class, 'show'])->name('event_show');
+    
+    Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
+    Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
     // User Management Routes
     Route::get('user-management', fn() => view('laravel-examples/user-management'))->name('user-management');
 
