@@ -45,4 +45,23 @@ class DiscussionController extends Controller
 
         return redirect()->route('diskusi.index')->with('success', 'Discussion created successfully!');
     }
+    public function edit($id)
+    {
+        $discussion = Discussion::findOrFail($id);
+        return view('diskusi_edit', compact('discussion'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate(['title' => 'required|string|max:255', 'content' => 'required|string',]);
+        $discussion = Discussion::findOrFail($id);
+        $discussion->update($request->all());
+        return redirect()->route('discussions.index')->with('success', 'Diskusi berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $discussion = Discussion::findOrFail($id);
+        $discussion->delete();
+        return redirect()->route('diskusi.index')->with('success', 'Diskusi berhasil dihapus.');
+    }
 }

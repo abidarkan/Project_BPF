@@ -45,4 +45,40 @@ class ArtikelController extends Controller
 
         return redirect()->route('artikel.index')->with('success', 'Artikel created successfully!');
     }
+
+    public function edit($id)
+    {
+        $article = Article::with('tags')->findOrFail($id);
+        $tags = Tag::all();
+        return view('artikel_edit', compact('article', 'tags'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+
+        $article = Article::findOrFail($id);
+        $article->update([
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+        ]);
+
+        $article->tags()->sync($validatedData['tags']);
+
+        return redirect()->route('artikel.index')->with('success', 'Artikel updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->tags()->detach();
+        $article->delete();
+
+        return redirect()->route('artikel.index')->with('success', 'Artikel deleted successfully!');
+    }
 }

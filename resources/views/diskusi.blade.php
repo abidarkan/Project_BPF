@@ -26,6 +26,7 @@
                                         <th>Penulis</th>
                                         <th>Balasan</th>
                                         <th>Aktivitas Terakhir</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,11 +68,21 @@
                                                 <td class="text-muted text-sm">
                                                     {{ $discussion->updated_at->diffForHumans() }}
                                                 </td>
+
+                                                <!-- Actions Column -->
+                                                <td>
+                                                    <a href="{{ route('discussions.edit', ['discussion' => $discussion->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <form action="{{ route('discussions.destroy', ['discussion' => $discussion->id]) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="5" class="text-muted text-center py-3">
+                                            <td colspan="6" class="text-muted text-center py-3">
                                                 Belum ada diskusi. Mulai dengan membuat yang baru!
                                             </td>
                                         </tr>

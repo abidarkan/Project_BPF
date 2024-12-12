@@ -25,6 +25,7 @@
                                         <th>Tag</th>
                                         <th>Penulis</th>
                                         <th>Aktivitas Terakhir</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,12 +62,22 @@
                                                 <td class="text-muted text-sm">
                                                     {{ $article->updated_at->diffForHumans() }}
                                                 </td>
+
+                                                <!-- Actions Column -->
+                                                <td>
+                                                    <a href="{{ route('artikel.edit', ['artikel' => $article->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <form action="{{ route('artikel.destroy', ['artikel' => $article->id]) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <!-- Empty State for No Articles -->
                                         <tr>
-                                            <td colspan="4" class="text-muted text-center py-3">
+                                            <td colspan="5" class="text-muted text-center py-3">
                                                 Belum ada artikel. Mulai dengan membuat yang baru!
                                             </td>
                                         </tr>

@@ -10,8 +10,8 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="d-flex flex-column h-100">
-                                <p class="mb-1 pt-2 text-bold">Announcement</p>
-                                <h5 class="font-weight-bolder">(Judul Announcement)</h5>
+                                <p class="mb-1 pt-2 text-bold">Diskusi</p>
+                                <h5 class="font-weight-bolder">(???)</h5>
                                 <p class="mb-4">(Isi Announcement)</p>
                                 <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
                                     href="javascript:;">

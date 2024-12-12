@@ -95,7 +95,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Event (admin)</span>
+                    <span class="nav-link-text ms-1">Event</span>
                 </a>
             </li>
 

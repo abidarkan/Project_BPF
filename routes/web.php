@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::get('artikel/create', [ArtikelController::class, 'create'])->name('artikel.create'); // Show create article form
     Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store'); // Store new article
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show'); // Show article by ID
+    Route::get('/artikel/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+    Route::put('/artikel/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');
+    Route::delete('/artikel/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
     // Events Routes
     Route::get('/event', [EventController::class, 'index'])->name('events.index');
@@ -80,6 +83,9 @@ Route::middleware('auth')->group(function () {
     Route::get('diskusi', [DiscussionController::class, 'index'])->name('diskusi.index');
     Route::get('showDiskusi/{id}', [DiscussionController::class, 'show'])->name('discussions.show');
     Route::get('createDiskusi', [DiscussionController::class, 'create'])->name('discussions.create');
+    Route::get('/discussions/{discussion}/edit', [DiscussionController::class, 'edit'])->name('discussions.edit');
+    Route::put('/discussions/{discussion}', [DiscussionController::class, 'update'])->name('discussions.update');
+    Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy'])->name('discussions.destroy');
 });
 
 // Guest Routes
