@@ -60,10 +60,12 @@ Route::middleware('auth')->group(function () {
     // Events Routes
     Route::get('/event', [EventController::class, 'index'])->name('events.index');
     Route::get('/event/create', [EventController::class, 'create'])->name('event_create');
-    Route::put('/event/{event}', [EventController::class, 'update'])->name('event_update');
     Route::post('/event', [EventController::class, 'store'])->name('event_store');
-    Route::post('/event/{event}', [EventController::class, 'show'])->name('event_show');
-    
+    Route::get('/event/{event}', [EventController::class, 'show'])->name('event_show');
+    Route::put('/event/{event}', [EventController::class, 'update'])->name('event_update');
+    Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
+    Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
+
     Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
     Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
     // User Management Routes
