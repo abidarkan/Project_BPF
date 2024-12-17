@@ -24,6 +24,8 @@
                              class="rounded-circle me-2" 
                              style="width: 40px; height: 40px; object-fit: cover;">
                         <span class="d-none d-md-inline font-weight-bold">{{ Auth::user()->name }}</span>
+                        <span class="d-none d-md-inline font-weight-bold">|</span>
+                        <span class="d-none d-md-inline font-weight-bold">{{ Auth::user()->role }}</span>
                         <i class="fa fa-chevron-down ms-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3" aria-labelledby="profileDropdown">
