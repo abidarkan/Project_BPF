@@ -2,17 +2,17 @@
 
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscussionCommentController;
+use App\Http\Controllers\DiscussionController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\DiscussionController;
-use App\Http\Controllers\DiscussionCommentController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\DashboardController;
-use App\Models\Article; // Ensure this import is included
-
+use App\Http\Controllers\UserController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,17 +21,36 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application.
-| These routes are loaded by the RouteServiceProvider within a group 
+| These routes are loaded by the RouteServiceProvider within a group
 | which contains the "web" middleware group. Now create something great!
 |
 */
 
+// Admin Routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    // User Management Routes
+    Route::get('user-management', [UserController::class, 'index'])->name('users.index');
+    Route::put('user-management/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    Route::delete('user-management/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/admin-only', function () {
+        return 'Welcome, Admin!';
+    });
+});
+
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
+    // Event Management Routes (accessible by all authenticated users)
+    Route::get('/event', [EventController::class, 'index'])->name('events.index');
+    Route::get('/event/create', [EventController::class, 'create'])->name('event_create');
+    Route::post('/event', [EventController::class, 'store'])->name('event_store');
+    Route::get('/event/{event}', [EventController::class, 'show'])->name('event_show');
+    Route::put('/event/{event}', [EventController::class, 'update'])->name('event_update');
+    Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
+    Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
+
     // Dashboard Home
     Route::get('/', [HomeController::class, 'home'])->name('home');
-
-    // Dashboard with Controller
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Article Routes
@@ -58,18 +77,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/artikel/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
     Route::put('/artikel/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');
     Route::delete('/artikel/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
-
-    // Event Management Routes
-    Route::get('/event', [EventController::class, 'index'])->name('events.index');
-    Route::get('/event/create', [EventController::class, 'create'])->name('event_create');
-    Route::post('/event', [EventController::class, 'store'])->name('event_store');
-    Route::get('/event/{event}', [EventController::class, 'show'])->name('event_show');
-    Route::put('/event/{event}', [EventController::class, 'update'])->name('event_update');
-    Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
-    Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
-
-    // User Management Routes
-    Route::get('user-management', fn() => view('laravel-examples/user-management'))->name('user-management');
 
     // Logout Route
     Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');

@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -22,6 +20,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_picture',
+        'role', // Added role attribute
     ];
 
     /**
@@ -47,6 +46,8 @@ class User extends Authenticatable
         ];
     }
 
+    // Relationships
+
     public function articles()
     {
         return $this->hasMany(Article::class, 'author_id');
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(DiscussionComment::class, 'created_by');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

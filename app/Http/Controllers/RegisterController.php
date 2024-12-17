@@ -22,10 +22,9 @@ class RegisterController extends Controller
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
             'password' => ['required', 'min:5', 'max:20'],
             'agreement' => ['accepted'],
-            'profile_picture' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'] // Validating profile picture
+            'profile_picture' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
-        // Handle profile picture upload
         if ($request->hasFile('profile_picture')) {
             $imageName = time() . '.' . $request->profile_picture->extension();  
             Storage::disk('public')->put($imageName, file_get_contents($request->file('profile_picture')));
@@ -33,6 +32,7 @@ class RegisterController extends Controller
         }
 
         $attributes['password'] = bcrypt($attributes['password']);
+        $attributes['role'] = 'guest'; // Set default role to guest
 
         $user = User::create($attributes);
 
