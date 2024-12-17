@@ -16,13 +16,7 @@
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang di UKM Computer Science Binus</h3>
                   <p class="mb-0">Kami adalah komunitas mahasiswa di bidang teknologi dan ilmu komputer di Universitas Bina Nusantara.</p>
-                  <p class="mb-0">Temui pengurus kami:</p>
-                  <ul>
-                    <li><b>Ketua:</b> [Nama Ketua]</li>
-                    <li><b>Wakil Ketua:</b> [Nama Wakil Ketua]</li>
-                    <li><b>Divisi Teknologi:</b> [Nama Divisi Teknologi]</li>
-                    <li><b>Divisi Pengembangan Karir:</b> [Nama Divisi Pengembangan Karir]</li>
-                  </ul>
+                  <p></p>
                   <p class="mb-0">Untuk bergabung dan menjadi bagian dari kami, silakan login atau buat akun baru.</p>
                 </div>
                 <div class="card-body">
@@ -53,7 +47,7 @@
                   <p class="mb-4 text-sm mx-auto">
                     Belum punya akun? 
                     <a href="register" class="text-info text-gradient font-weight-bold">Daftar</a>
-                  </p>
+                  </p> 
                 </div>
               </div>
             </div>

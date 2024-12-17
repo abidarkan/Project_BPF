@@ -7,10 +7,11 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
-use App\Models\Article;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DiscussionCommentController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Article; // Ensure this import is included
 
 use Illuminate\Support\Facades\Route;
 
@@ -30,12 +31,10 @@ Route::middleware('auth')->group(function () {
     // Dashboard Home
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
-    // Example Views
-    Route::get('/dashboard', function () {
-        $articles = Article::all();
-        return view('dashboard', compact('articles'));
-    })->name('dashboard');
+    // Dashboard with Controller
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Article Routes
     Route::get('artikel', function () {
         $articles = Article::all();
         return view('artikel', compact('articles'));
@@ -52,15 +51,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-profile', [InfoUserController::class, 'create'])->name('user-profile');
     Route::post('/user-profile', [InfoUserController::class, 'store']);
 
-    // Article Routes
-    Route::get('artikel/create', [ArtikelController::class, 'create'])->name('artikel.create'); // Show create article form
-    Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store'); // Store new article
-    Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show'); // Show article by ID
+    // Article Creation and Management
+    Route::get('artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
+    Route::post('artikel/store', [ArtikelController::class, 'store'])->name('artikel.store');
+    Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
     Route::get('/artikel/{artikel}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
     Route::put('/artikel/{artikel}', [ArtikelController::class, 'update'])->name('artikel.update');
     Route::delete('/artikel/{artikel}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
-    // Events Routes
+    // Event Management Routes
     Route::get('/event', [EventController::class, 'index'])->name('events.index');
     Route::get('/event/create', [EventController::class, 'create'])->name('event_create');
     Route::post('/event', [EventController::class, 'store'])->name('event_store');
@@ -69,15 +68,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
     Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
 
-    Route::delete('/event/{event}', [EventController::class, 'destroy'])->name('event_destroy');
-    Route::get('/event/{event}/edit', [EventController::class, 'edit'])->name('event_edit');
     // User Management Routes
     Route::get('user-management', fn() => view('laravel-examples/user-management'))->name('user-management');
 
-    // Logout
+    // Logout Route
     Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
-    // Route Diskusi
+    // Discussion Routes
     Route::resource('discussions', DiscussionController::class);
     Route::post('discussion-comments', [DiscussionCommentController::class, 'store'])->name('discussion-comments.store');
     Route::get('diskusi', [DiscussionController::class, 'index'])->name('diskusi.index');
@@ -90,15 +87,15 @@ Route::middleware('auth')->group(function () {
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
-    // Registration
+    // Registration Routes
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 
-    // Login
+    // Login Routes
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/session', [SessionsController::class, 'store']);
 
-    // Password Reset
+    // Password Reset Routes
     Route::get('/login/forgot-password', [ResetController::class, 'create'])->name('password.request');
     Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
