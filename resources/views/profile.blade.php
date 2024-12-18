@@ -3,20 +3,14 @@
 @section('content')
 <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
     <div class="container-fluid">
-
-        <!-- Header Section with Background Image -->
-        <div class="page-header min-height-300 border-radius-xl mt-4"
-            style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-            <span class="mask bg-gradient-primary opacity-6"></span>
-        </div>
-
+        
         <!-- User Profile Section -->
-        <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-            <div class="row gx-4">
+        <div class="card card-body blur shadow-blur mx-4 mt-4 overflow-hidden">
+            <div class="row gx-4 align-items-center">
                 <!-- Profile Image -->
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture">
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle">
                     </div>
                 </div>
 
@@ -39,20 +33,14 @@
         <div class="d-flex justify-content-center align-items-center mt-4">
             <div class="col-12 col-md-6">
                 <div class="card h-100">
-                    
                     <div class="card-body p-3">
-                        
-                        
                         <ul class="list-group">
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm">
                                 <strong class="text-dark">Full Name:</strong> &nbsp; {{ Auth::user()->name }}
                             </li>
-                           
                             <li class="list-group-item border-0 ps-0 text-sm">
                                 <strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}
                             </li>
-                            
-                            
                         </ul>
                     </div>
                 </div>
